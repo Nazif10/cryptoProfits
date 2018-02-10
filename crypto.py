@@ -24,12 +24,13 @@ def price(symbol, comparison_symbols=['USD','AUD'], exchange=''):
 
 # price('eth')
 
-def historical(symbol,comparison_symbols=['USD'],time_stamp=1452680400):
+def historical(symbol,time_stamp,comparison_symbols=['USD']):
 
     url = 'https://min-api.cryptocompare.com/data/pricehistorical?fsym={}&tsyms={}&ts={}'\
             .format((symbol.upper()),','.join(comparison_symbols).upper(),time_stamp)
     page = requests.get(url)
     data = page.json()
+    print(data)
     return data
 
 # historical('ETH')
@@ -39,11 +40,13 @@ def dateConverter():
     print(d)
     d = d - date(1970,1,1)
     unix_time = d.total_seconds()
-    print(unix_time)
+    return unix_time
 
 
 
-dateConverter()   
+histDate = dateConverter()
+historical('ETH',histDate)
+
 # def calcGainz(int investment,):
 # 	ret = price('ltc',exchange='Poloniex')
 # 	print(ret)
