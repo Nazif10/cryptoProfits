@@ -35,17 +35,18 @@ def historical(symbol,time_stamp,comparison_symbols=['USD']):
 
 # historical('ETH')
 
-def dateConverter():
-    d = date(2017,3,4)
+def dateConverter(year,month,day):
+    d = date(year,month,day)
     print(d)
     d = d - date(1970,1,1)
     unix_time = d.total_seconds()
     return unix_time
 
+if __name__ == '__main__':
 
 
-histDate = dateConverter()
-historical('ETH',histDate)
+    histDate = dateConverter(int(2017),int(4),int(3))
+    historical('ETH',histDate)
 
 # def calcGainz(int investment,):
 # 	ret = price('ltc',exchange='Poloniex')
