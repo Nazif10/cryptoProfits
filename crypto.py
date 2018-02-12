@@ -22,7 +22,6 @@ def price(symbol, comparison_symbols=['USD','AUD'], exchange=''):
     return data
 
 
-# price('eth')
 
 def historical(symbol,time_stamp,comparison_symbols=['USD']):
 
@@ -30,7 +29,6 @@ def historical(symbol,time_stamp,comparison_symbols=['USD']):
             .format((symbol.upper()),','.join(comparison_symbols).upper(),time_stamp)
     page = requests.get(url)
     data = page.json()
-    print(data)
     return data
 
 # historical('ETH')
@@ -46,7 +44,10 @@ if __name__ == '__main__':
 
 
     histDate = dateConverter(int(2017),int(4),int(3))
-    historical('ETH',histDate)
+    data = historical('ETH',histDate)
+    print(data['ETH']['USD'])
+
+
 
 # def calcGainz(int investment,):
 # 	ret = price('ltc',exchange='Poloniex')
