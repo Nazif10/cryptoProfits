@@ -44,7 +44,8 @@ if __name__ == '__main__':
 
 
     histDate = dateConverter(int(2017),int(4),int(3))
-    data = historical('ETH',histDate)
+    currency = 'ETH'
+    data = historical(currency,histDate)
     print(data['ETH']['USD'])
 
 
