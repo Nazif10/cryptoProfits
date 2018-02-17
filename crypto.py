@@ -7,18 +7,13 @@ from datetime import timedelta
 import json
 import time 
 
-#import pandas as pd
-#import matplotlib.pyplot as plt
-
-
-def price(symbol, comparison_symbols=['USD','AUD'], exchange=''):
+def price(symbol, comparison_symbols=['USD'], exchange=''):
     url = 'https://min-api.cryptocompare.com/data/price?fsym={}&tsyms={}'\
             .format(symbol.upper(),','.join(comparison_symbols).upper())
     # if exchange:
     #     url += '&e={}'.format(exchange)
     page = requests.get(url)
     data = page.json()
-    print(data)
     return data
 
 
@@ -31,7 +26,6 @@ def historical(symbol,time_stamp,comparison_symbols=['USD']):
     data = page.json()
     return data
 
-# historical('ETH')
 
 def dateConverter(year,month,day):
     d = date(year,month,day)
@@ -40,19 +34,17 @@ def dateConverter(year,month,day):
     unix_time = d.total_seconds()
     return unix_time
 
+def profits(investment,currency,date):
+    historical_price = historical(currency,date)
+    units_bought = investment/historical_price[currency]['USD']
+    current_price = price(currency)
+    profit = units_bought*current_price['USD']
+    return profit
+
 if __name__ == '__main__':
 
-
+    initial_investment = 1200
     histDate = dateConverter(int(2017),int(4),int(3))
     currency = 'ETH'
-    data = historical(currency,histDate)
-    print(data['ETH']['USD'])
-
-
-
-# def calcGainz(int investment,):
-# 	ret = price('ltc',exchange='Poloniex')
-# 	print(ret)
-
-# 	gainz = 1000/int(ret['USD'])
-# 	print(gainz)
+    gainz = profits(initial_investment,currency,histDate)
+    print(gainz)
